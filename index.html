@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <title>4 squares</title>
+
+    <style>
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .wrap {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 800px;
+        height: 800px;
+      }
+      
+      .container {
+        height: 400px;
+        width: 800px;
+        display: flex;
+        
+        transition: all 1s linear;
+      }
+      .block {
+        width: 50%;
+        height: 100%;
+
+        transition: all 1s linear;
+
+        border: 1px solid black;
+      }
+      .block:nth-child(2) {
+        flex-grow: 1;
+        height: auto;
+      }
+
+    </style>
+
+    
+  </head>
+  <body>
+
+    <div class="wrap">
+    
+      <div class="container">
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+      <div class="container">
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+
+    </div>
+
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+    <script>
+      
+      var procent = 1;
+      var container = $('.container');
+
+      setInterval(function() {
+        var procent1 = Math.random();
+        var procent2 = Math.random() * ((procent - procent1) - 0) + 0;
+        var procent3 = Math.random() * ((procent - procent1 - procent2) - 0) + 0;
+        var procent4 = procent - procent1 - procent2 - procent3;
+
+        procent1 *=100;
+        procent2 *=100;
+        procent3 *=100;
+        procent4 *=100;
+
+        container.eq(0).find('.block').eq(0).css({
+          width: (8 * procent1)+"px",
+          height: procent1 > procent2 ? (8 * procent1)+"px" : (8 * procent2)+"px",
+          backgroundColor: "#"+((1<<24)*Math.random()|0).toString(16),
+        });
+        container.eq(0).find('.block').eq(1).css({
+          backgroundColor: "#"+((1<<24)*Math.random()|0).toString(16),
+        });
+        container.eq(0).css({
+          height: procent1 > procent2 ? (8 * procent1)+'px' : (8 * procent2)+'px',
+        })
+        container.eq(1).find('.block').eq(0).css({
+          width: (8 * procent3)+"px",
+          height: procent1 > procent2 ? 800 - (8 * procent1)+'px' : 800 - (8 * procent2)+'px',
+          backgroundColor: "#"+((1<<24)*Math.random()|0).toString(16),
+        });
+        container.eq(1).find('.block').eq(1).css({
+          backgroundColor: "#"+((1<<24)*Math.random()|0).toString(16),
+        });
+        container.eq(1).css({
+          height: procent1 > procent2 ? 800 - (8 * procent1)+'px' : 800 - (8 * procent2)+'px',
+        })
+
+      },2000)
+
+
+    </script>
+    
+  </body>
+</html>
