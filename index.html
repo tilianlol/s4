@@ -73,7 +73,7 @@
       var procent = 1;
       var container = $('.container');
 
-      setInterval(function() {
+      function Generator() {
         var procent1 = Math.random();
         var procent2 = Math.random() * ((procent - procent1) - 0) + 0;
         var procent3 = Math.random() * ((procent - procent1 - procent2) - 0) + 0;
@@ -106,7 +106,12 @@
         container.eq(1).css({
           height: procent1 > procent2 ? 800 - (8 * procent1)+'px' : 800 - (8 * procent2)+'px',
         })
+      }
 
+      Generator();
+      
+      setInterval(function() {
+        Generator();
       },2000)
 
 
